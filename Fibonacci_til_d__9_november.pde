@@ -29,7 +29,7 @@ Integer fibonacci(int n, int x, int y, int xwidth) {
   // tegn cirkel og forbind med linjer.
   circle(x, y, 15);
   text(x+" "+y, x, y);
-  // her er noget med en regne regl, derfor skal det i parantes
+  
   line (x, y, x+xwidth, y+50);
   line (x, y, x-xwidth, y+50);
 
