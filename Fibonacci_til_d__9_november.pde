@@ -1,36 +1,37 @@
-// Variabler
+// Variabler //<>// //<>// //<>// //<>//
 
 
 void setup() {
-  size(1000,600);
+  size(2800, 600);
   fill(0); // ingen grund til at gentage fill() :)
-  pushMatrix(); //<>//
+  textSize(20);
+  pushMatrix();
   // Sætter skærmens øverste punkt i midten til at være 0,0
-  translate(width/2,0);
-  println(fibonacci(10,500,50)); // Tre parametre. Første er tal du ønsker i talrækken, andet er hvor meget x koordinatet skal ændre sig ned af træet, og tredje er hvor meget y værdien skal stige i hver gren. //<>//
+  translate(width/4, 0); // jeg skal ikke forskyde så meget for jeg går ikke ud fra width/2 mere
+
+  // n,x,y,xwidth
+  println(fibonacci(10, 500, 50, 500)); // Tre parametre. Første er tal du ønsker i talrækken, andet er hvor meget x koordinatet skal ændre sig ned af træet, og tredje er hvor meget y værdien skal stige i hver gren.
   popMatrix();
 }
 
 
 // Har valgt integer, fordi hvis man tager en funktionen til et stort tal kan int ikke holde den.
-Integer fibonacci(int n, int x, int y) { //<>//
-
-  
-
-  //if(x < width/2) {
-    //circle(-x,y,15);
-    circle(x,y,15); //<>//
-    line (x,y,x/2,y+50);
-  //} else {
-//    circle(0,y,15);
-//  }
-  
-  
+Integer fibonacci(int n, int x, int y, int xwidth) {
   // Return statements - SKAL VÆRE NEDERST
-  if(n == 0 || n == 1) {
+  // din terminerings regl SKAL være øverst :)
+  if (n == 0 || n == 1) {
+    // tegn den sidste cirkel uden linjer
+    circle(x, y, 15);
+    text(x+" "+y, x, y);
     return n;
   }
-  
-  return fibonacci(n-1,(x/2)*-1,y+50) + fibonacci(n-2,x/2,y+50);
-  
+
+  // tegn cirkel og forbind med linjer.
+  circle(x, y, 15);
+  text(x+" "+y, x, y);
+  // her er noget med en regne regl, derfor skal det i parantes
+  line (x, y, x+xwidth, y+50);
+  line (x, y, x-xwidth, y+50);
+
+  return fibonacci(n-1, x-xwidth, y+50, xwidth/2) + fibonacci(n-2, x+xwidth, y+50, xwidth/2);
 }
